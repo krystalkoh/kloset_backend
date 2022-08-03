@@ -1,3 +1,4 @@
+#############creating a superuser
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -9,9 +10,8 @@ class AccountManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email), #normalize_email makes email address all small
             given_name=given_name,
-            other_name=other_name,
         )
-        user.set_password(password) #set_password encrypts the password automaticlaly
+        user.set_password(password) #set_password encrypts the password automatically
         user.save(using=self._db)
 
         return user
@@ -20,7 +20,6 @@ class AccountManager(BaseUserManager):
         user = self.create_user(
             email=email,
             given_name=given_name,
-            other_name=other_name,
             password=password
         )
         user.is_staff = True
