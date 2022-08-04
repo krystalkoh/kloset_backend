@@ -9,6 +9,7 @@ class AccountManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email), #normalize_email makes email address all small
+            other_name=other_name,
             given_name=given_name,
         )
         user.set_password(password) #set_password encrypts the password automatically
@@ -19,6 +20,7 @@ class AccountManager(BaseUserManager):
     def create_superuser(self, email, given_name, other_name, password):
         user = self.create_user(
             email=email,
+            other_name=other_name,
             given_name=given_name,
             password=password
         )
