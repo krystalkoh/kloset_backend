@@ -1,4 +1,5 @@
 #############creating a superuser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -31,17 +32,16 @@ class AccountManager(BaseUserManager):
 
         return user
 
-##creating actual table now. each line is a column in the account table
+#creating actual table now. each line is a column in the account table
 class Account(AbstractBaseUser):
-    email = models.EmailField(verbose_name='email', max_length=60, unique=True)
+    # email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     given_name = models.CharField(max_length=30)
-    other_name = models.CharField(max_length=30)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     #the following 4 is required... cannot change
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
 
     objects = AccountManager()
@@ -58,3 +58,6 @@ class Account(AbstractBaseUser):
     #which views does the user have permission to
     def has_module_perms(self, app_label):
         return True
+
+# class CustomUser(AbstractUser):
+#     address = models.CharField(max_length=100)

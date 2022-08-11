@@ -45,7 +45,10 @@ class Clothes(models.Model):
     date_listed = models.DateField (auto_now=True)
     availability = models.BooleanField()
     user_email = models.ForeignKey(Users, on_delete=models.DO_NOTHING, null=True)
-    clothes_image = models.ImageField(upload_to='post_images')
+    clothes_image = models.ImageField(upload_to='post_images', null=True)
+    #clothes_images
+    clothes_images_url = models.TextField(max_length=1000, null=True)
+    #need to either give default or null
     def __str__(self):
         return self.name_of_item
 #     #one member can have more than one address.. .so addresses have a foreign key to members
